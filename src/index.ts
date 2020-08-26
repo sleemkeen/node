@@ -4,6 +4,7 @@ import express from "express";
 import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
 import { HelloResolver } from "./resolvers/hello";
+import { PostsResolver } from "./resolvers/posts";
 
 
 const main = async () => {
@@ -14,15 +15,21 @@ const main = async () => {
 
     const apolloServer = new ApolloServer({
         schema: await buildSchema({
-          resolvers: [HelloResolver],
+          resolvers: [HelloResolver, PostsResolver],
           validate: false,
         }),
+        context: () => ({ em: orm.em})
     });
     
     apolloServer.applyMiddleware({ app });
 
-    app.listen(4000, () => {
-      console.log("server started on localhost:4000");
+    // app.get('/', (req, res) => {
+    //     res.send('Api testing')
+    // });
+      
+
+    app.listen(5000, () => {
+      console.log("server started on localhost:5000");
     });
   };
   
