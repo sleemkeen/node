@@ -42,3 +42,49 @@ mutation{
 mutation{
   deletePost(id: 7)
 }
+
+
+//register
+
+mutation{
+  register(options: {
+    username: "sleemkeen",
+    password: "howareyou",
+    firstname: "Haruna",
+    lastname: "ahmadu"
+    
+  }){
+    errors{
+      field
+      message
+    }
+    user{
+      id
+      firstname
+      lastname
+    }
+    
+    
+  }
+}
+
+//login
+
+mutation{
+  login(options: {
+    username: "sleemkeen",
+    password: "howareyou"
+  }){
+    errors{
+      field
+      message
+    }
+    user{
+      id
+      firstname
+      lastname
+    }
+    
+    
+  }
+}
